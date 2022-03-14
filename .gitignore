@@ -37,3 +37,5 @@ src/apis/reportingReportParameter.tsx
 src/components/crudViews/editModal.stories.tsx
 *.playground.stories.tsx
 storybook-static
+example/.next
+example/.vscode
