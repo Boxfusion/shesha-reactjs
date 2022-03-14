@@ -1,0 +1,60 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "strict": false,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "experimentalDecorators": true,
+        "jsx": "preserve",
+        "baseUrl": ".",
+        "paths": {
+            "components": ["src/components"],
+            "enums": ["src/enums"],
+            "hocs": ["src/hocs"],
+            "hooks": ["src/hooks"],
+            "models": ["src/models"],
+            "models/*": ["src/models/*"],
+            "api": ["src/api"],
+            "api/*": ["src/api/*"],
+            "app-constants": ["src/app-constants"],
+            "public": ["public"],
+            "definitions": ["src/definitions"],
+            "providers": ["src/providers"],
+            "providers/*": ["src/providers/*"],
+            "roots": ["src/roots"],
+            "utils": ["src/utils"],
+            "interfaces": ["src/interfaces"],
+            "routes": ["src/routes"],
+            "routes/settingsRoutes": ["src/routes/settingsRoutes"],
+            "routes/*": ["src/routes/*"],
+            "styles": ["src/styles"],
+            "theme": ["src/theme"],
+            "theme/*": ["src/theme/*"],
+            "i18n": ["./i18n.json"],
+            "test": ["test"]
+        },
+        "typeRoots": ["typings", "node_modules/@types"]
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx"
+, "restful-react.config.js"    ],
+    "exclude": [
+        "node_modules",
+        "test/*",
+        "src/api/**"
+    ]
+}
