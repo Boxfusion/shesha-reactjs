@@ -14,7 +14,7 @@ import {
   MetadataDispatcherProvider,
 } from '@shesha/reactjs';
 import { useRouter } from 'next/router';
-import { CustomErrorBoundary, CustomNProgress } from 'components';
+import { CustomNProgress } from 'components';
 import { customComponents } from 'src/components/designer.config';
 import { BASE_URL } from 'src/api/utils/constants';
 import { StyledThemeProvider } from 'src/definitions/styled-components';
