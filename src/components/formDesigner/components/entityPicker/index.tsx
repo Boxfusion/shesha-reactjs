@@ -13,9 +13,11 @@ import EntityFooter from './entityFooter';
 
 export interface IEntityPickerComponentProps extends IConfigurableFormComponent {
   placeholder?: string;
+  items?: [];
   hideBorder?: boolean;
   disabled?: boolean;
   tableId: string;
+  entityType: string;
   title?: string;
   displayEntityKey?: string;
   allowNewRecord?: boolean;
@@ -36,17 +38,28 @@ const EntityPickerComponent: IToolboxComponent<IEntityPickerComponentProps> = {
   factory: (model: IEntityPickerComponentProps) => {
     const { formMode } = useForm();
 
-    if (formMode === 'designer' && !model?.tableId) {
-      return <Alert message="Please make sure that you've specified the tableId property" />;
+    if (formMode === 'designer' && !model?.tableId && !model?.entityType) {
+      return (
+        <Alert
+          showIcon
+          message="EntityPicker not configured properly"
+          description="Please make sure that you've specified either the 'tableId' or 'entityType' property."
+          type="warning"
+        />
+      );
     }
 
     return (
       <ConfigurableFormItem model={model} initialValue={model?.defaultValue}>
-          <EntityPicker
-            disabled={model.disabled}
-            tableId={model?.tableId}
-            displayEntityKey={model?.displayEntityKey}
-            entityFooter={<EntityFooter {...model} />} />
+        <EntityPicker
+          formId={model?.id}
+          disabled={model.disabled}
+          tableId={model?.tableId}
+          displayEntityKey={model?.displayEntityKey}
+          entityType={model?.entityType}
+          entityFooter={<EntityFooter {...model} />}
+          configurableColumns={model?.items}
+        />
       </ConfigurableFormItem>
     );
   },

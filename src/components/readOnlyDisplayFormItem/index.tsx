@@ -16,15 +16,15 @@ export interface IReadOnlyDisplayFormItemProps {
   value?: any;
   render?: () => ReactNode | ReactNode;
   type?:
-    | 'string'
-    | 'number'
-    | 'dropdown'
-    | 'dropdownMultiple'
-    | 'time'
-    | 'datetime'
-    | 'checkbox'
-    | 'switch'
-    | 'radiogroup';
+  | 'string'
+  | 'number'
+  | 'dropdown'
+  | 'dropdownMultiple'
+  | 'time'
+  | 'datetime'
+  | 'checkbox'
+  | 'switch'
+  | 'radiogroup';
   dropdownDisplayMode?: 'raw' | 'tags';
   dateFormat?: string;
   timeFormat?: string;
@@ -34,6 +34,8 @@ export interface IReadOnlyDisplayFormItemProps {
   quickviewEnabled?: boolean;
   quickviewFormPath?: string;
   quickviewDisplayPropertyName?: string;
+  quickviewGetEntityUrl?: string;
+  quickviewWidth?: number;
 }
 
 export const ReadOnlyDisplayFormItem: FC<IReadOnlyDisplayFormItemProps> = ({
@@ -48,7 +50,9 @@ export const ReadOnlyDisplayFormItem: FC<IReadOnlyDisplayFormItemProps> = ({
   defaultChecked,
   quickviewEnabled,
   quickviewFormPath,
-  // quickviewDisplayPropertyName,
+  quickviewDisplayPropertyName,
+  quickviewGetEntityUrl,
+  quickviewWidth,
 }) => {
   if (type === 'string') {
     console.log('ReadOnlyDisplayFormItem type, disabled: ', type, disabled);
@@ -74,11 +78,11 @@ export const ReadOnlyDisplayFormItem: FC<IReadOnlyDisplayFormItemProps> = ({
           if (quickviewEnabled && quickviewFormPath) {
             return (
               <QuickView
-                title={JSON.stringify(value)}
+                entityId={value?.data}
                 formPath={quickviewFormPath}
-                formValues={value}>
-                {displayLabel}
-              </QuickView>
+                getEntityUrl={quickviewGetEntityUrl}
+                displayProperty={quickviewDisplayPropertyName}
+                width={quickviewWidth} />
             );
           } else {
             return displayLabel;

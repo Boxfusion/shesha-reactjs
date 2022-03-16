@@ -34,6 +34,8 @@ export interface IAutocompleteProps extends IConfigurableFormComponent {
   quickviewEnabled?: boolean;
   quickviewFormPath?: string;
   quickviewDisplayPropertyName?: string;
+  quickviewGetEntityUrl?: string;
+  quickviewWidth?: number;
 }
 
 const settingsForm = settingsFormJson as FormMarkup;
@@ -116,7 +118,9 @@ const AutocompleteComponent: IToolboxComponent<IAutocompleteProps> = {
 
       quickviewEnabled: model?.quickviewEnabled,
       quickviewFormPath: model?.quickviewFormPath,
-      quickviewDisplayPropertyName: model.quickviewDisplayPropertyName
+      quickviewDisplayPropertyName: model?.quickviewDisplayPropertyName,
+      quickviewGetEntityUrl: model?.quickviewGetEntityUrl,
+      quickviewWidth: model?.quickviewWidth,
     };
 
     // todo: implement other types of datasources!

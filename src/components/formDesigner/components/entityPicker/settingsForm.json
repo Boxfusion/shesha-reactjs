@@ -62,14 +62,44 @@
       }
     },
     {
-      "id": "2d32fe60-99a0-4825-ae6c-8b933004e119",
-      "type": "textField",
+      "id": "8f8a9da8-1727-495a-b9eb-ff8627d97444",
+      "type": "autocomplete",
       "name": "tableId",
+      "label": "Table Configuration Id",
+      "labelAlign": "right",
       "parentId": "root",
-      "label": "Table ID",
+      "hidden": false,
+      "customVisibility": null,
       "validate": {
-        "required": true
-      }
+        "required": false
+      },
+      "dataSourceType": "url",
+      "dataSourceUrl": "/api/services/Shesha/NewDataTable/TableIdAutocomplete",
+      "settingsValidationErrors": [],
+      "useRawValues": true
+    },
+    {
+      "id": "6b0bd9c6-6a53-4a05-9de0-ad1b17eb0018",
+      "type": "autocomplete",
+      "name": "entityType",
+      "label": "Entity Type",
+      "labelAlign": "right",
+      "parentId": "root",
+      "hidden": false,
+      "customVisibility": null,
+      "dataSourceType": "url",
+      "validate": {},
+      "dataSourceUrl": "/api/services/app/Metadata/EntityTypeAutocomplete",
+      "settingsValidationErrors": [],
+      "useRawValues": true
+    },
+    {
+      "id": "2a6ee3b0-14f1-4521-bb6e-6a1c9d192ce2",
+      "type": "columnsEditorComponent",
+      "name": "items",
+      "parentId": "root",
+      "label": "Columns",
+      "customVisibility": "return data.tableId || data.entityType"
     },
     {
       "id": "cfd7d45e-c7e3-4a27-987b-dc525c412448",

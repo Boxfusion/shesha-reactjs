@@ -467,7 +467,7 @@
           "parentId": "root",
           "hidden": false,
           "customVisibility": "return data.buttonAction === 'executeScript'",
-          "description": "Enter custom code that will be executed when the button is clicked. The global variable data is provided, and allows you to access the data of any form component, by using its API key.",
+          "description": "Enter custom code that will be executed when the button is clicked. Global variables that are provided are 'data' - the state, 'moment' - moment object, 'form' - form instance, 'formMode' - form mode, and allows you to access the data of any form component, by using its API key.",
           "validate": {},
           "settingsValidationErrors": []
         }

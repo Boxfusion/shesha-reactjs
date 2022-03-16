@@ -51,6 +51,7 @@ import Space from '../../../components/formDesigner/components/space';
 import StatusTag from '../../../components/formDesigner/components/statusTag';
 import DynamicView from '../../../components/formDesigner/components/dynamicView';
 import ChildTable from '../../../components/formDesigner/components/dataTable/childTable';
+import ColumnsEditor from '../../../components/formDesigner/components/dataTable/table/columnsEditor/columnsEditorComponent';
 
 export const ToolboxComponents: IToolboxComponentGroup[] = [
   {
@@ -117,6 +118,7 @@ export const ToolboxComponents: IToolboxComponentGroup[] = [
       TableViewSelector,
       Toolbar,
       ChildTable,
+      ColumnsEditor, // Hidden
     ],
   },
   {
@@ -124,6 +126,7 @@ export const ToolboxComponents: IToolboxComponentGroup[] = [
     name: 'Typography',
     components: [Text, Title, Paragraph],
   },
+
   // {
   //   visible: false,
   //   name: 'Views',

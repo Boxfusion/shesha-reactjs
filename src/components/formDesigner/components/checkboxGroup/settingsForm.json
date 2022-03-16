@@ -100,6 +100,47 @@
       ]
     },
     {
+      "id": "b62d9f2e-a2f8-4cab-b63b-1b0185ad2939",
+      "type": "dropdown",
+      "name": "orientation",
+      "parentId": "root",
+      "label": "Orientation",
+      "dataSourceType": "values",
+      "values": [
+        {
+          "id": "9ac725c6-9a45-43d8-ba63-6b3de64f4ef2",
+          "label": "Vertical",
+          "value": "vertical"
+        },
+        {
+          "id": "dfe60d27-12a1-4ad6-b30b-791c9cbfe61e",
+          "label": "Inline",
+          "value": "inline"
+        }
+      ]
+    },
+    {
+      "id": "d2648d0e-4664-4fee-ab4a-b14e556d957b",
+      "type": "dropdown",
+      "name": "mode",
+      "parentId": "root",
+      "label": "Mode",
+      "values": [
+        {
+          "label": "single",
+          "value": "single",
+          "id": "b920ef96-ae27-4a01-bfad-b5b7d07238da"
+        },
+        {
+          "label": "multiple",
+          "value": "multiple",
+          "id": "b920ef96-ae27-4a01-bfad-b5b7d07218da"
+        }
+      ],
+      "dataSourceType": "values",
+      "defaultValue": ["single"]
+    },
+    {
       "id": "fd529f43-58d1-48dd-a8ad-2d2217c8b6b2",
       "type": "textField",
       "name": "referenceListNamespace",

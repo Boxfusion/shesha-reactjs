@@ -126,17 +126,27 @@ export interface IAutocompleteProps<TValue = any> extends IReadOnly {
   /**
    * Deteremines if quickview is enabled when in read only mode
    */
-   quickviewEnabled?: boolean;
+  quickviewEnabled?: boolean;
 
-   /**
-    * Specifies the form to use when quickview is enabled
-    */
-   quickviewFormPath?: string;
- 
-   /**
-    * Specifies which property to display for the quickview
-    */
-   quickviewDisplayPropertyName?: string;
+  /**
+   * Specifies the form to use when quickview is enabled
+   */
+  quickviewFormPath?: string;
+
+  /**
+   * Specifies which property to display for the quickview
+   */
+  quickviewDisplayPropertyName?: string;
+
+  /**
+   * The Url that details of the entity are retreived
+   */
+  quickviewGetEntityUrl?: string;
+
+  /**
+   * The width of the quickview
+   */
+  quickviewWidth?: number;
 }
 
 export interface IUrlFetcherQueryParams {
@@ -186,6 +196,8 @@ export const Autocomplete = <TValue, >(props: IAutocompleteProps<TValue>) => {
     quickviewEnabled,
     quickviewFormPath,
     quickviewDisplayPropertyName,
+    quickviewGetEntityUrl,
+    quickviewWidth,
   } = props;
 
   const entityFetcher = useAutocompleteList({ lazy: true });
@@ -343,7 +355,9 @@ export const Autocomplete = <TValue, >(props: IAutocompleteProps<TValue>) => {
         disabled={disabled}
         quickviewEnabled={quickviewEnabled}
         quickviewFormPath={quickviewFormPath}
-        quickviewDisplayPropertyName={quickviewDisplayPropertyName} />
+        quickviewDisplayPropertyName={quickviewDisplayPropertyName}
+        quickviewGetEntityUrl={quickviewGetEntityUrl}
+        quickviewWidth={quickviewWidth} />
     );
   }
 

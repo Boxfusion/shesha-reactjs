@@ -23,22 +23,19 @@ const BaseTemplate: Story<IQuickViewProps> = props => {
     return (
         <ShaApplicationProvider backendUrl={backendUrl}>
             <AuthContainer layout>
-                <>
-                    <QuickView
-                        title={props.title}
-                        formPath={props.formPath}
-                        formValues={{ membershipNumber: "00000000" }}>
-                        <Button type="primary">Hover me</Button>
-                    </QuickView>
-                </>
+                <QuickView {...props}>
+                    <Button type="link">Hello</Button>
+                </QuickView>
             </AuthContainer>
         </ShaApplicationProvider>
     );
 };
 
 const baseProps: IQuickViewProps = {
-    title: "Hello",
-    formPath: "/members/details",
+    entityId: '0cdad6b0-a3b2-4cf6-9b7d-238d753f0657',
+    formPath: 'quickview-his-health-facilities-details',
+    getEntityUrl: '/api/services/Common/HisHealthFacility/Get',
+    displayProperty: null
 };
 
 export const Base = BaseTemplate.bind({});

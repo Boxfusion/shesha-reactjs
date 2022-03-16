@@ -510,6 +510,7 @@ const DataTableProvider: FC<PropsWithChildren<IDataTableProviderProps>> = ({
     ) as IDataColumnsProps[];
 
     const properties = dataFields.map(f => f.propertyName);
+
     return properties;
   };
 

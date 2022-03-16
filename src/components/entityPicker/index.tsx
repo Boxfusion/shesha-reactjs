@@ -1,16 +1,24 @@
-import React, { FC, Fragment, ReactNode, useState } from 'react';
+import React, { FC, Fragment, ReactNode, useEffect, useState } from 'react';
 import { Modal, Input, Button, ButtonProps } from 'antd';
 import IndexTable from '../indexTable';
 import { IAnyObject } from '../../interfaces';
-import DataTableProvider from '../../providers/dataTable';
+import DataTableProvider, { useDataTable } from '../../providers/dataTable';
 import GlobalTableFilter from '../globalTableFilter';
 import TablePager from '../tablePager';
 import _ from 'lodash';
 import { SizeType } from 'antd/lib/config-provider/SizeContext';
 import { EllipsisOutlined } from '@ant-design/icons';
+import { IConfigurableColumnsBase } from '../../providers/datatableColumnsConfigurator/models';
 
-export interface IEntityPickerProps {
+interface IWrappedEntityPickerProps {
   tableId?: string;
+  entityType?: string;
+  parentEntityId?: string;
+  onDblClick?: (data: any) => void;
+}
+
+export interface IEntityPickerProps extends Omit<IWrappedEntityPickerProps, 'onDblClick'> {
+  formId?: string;
   onChange?: (value: string, data: IAnyObject) => void;
   onSelect?: (data: IAnyObject) => void;
   value?: any;
@@ -22,9 +30,9 @@ export interface IEntityPickerProps {
   title?: string;
   useButtonPicker?: boolean;
   pickerButtonProps?: ButtonProps;
-  parentEntityId?: string;
   defaultValue?: string;
   entityFooter?: ReactNode;
+  configurableColumns?: IConfigurableColumnsBase[]; // Type it later
 }
 
 export interface IEntityPickerState {
@@ -40,8 +48,9 @@ const INITIAL_STATE: IEntityPickerState = {
   selectedRow: null,
 };
 
-export const EntityPicker: FC<IEntityPickerProps> = ({
+export const EntityPickerInner: FC<IEntityPickerProps> = ({
   tableId,
+  entityType,
   displayEntityKey = 'displayName',
   onChange,
   disabled,
@@ -52,15 +61,32 @@ export const EntityPicker: FC<IEntityPickerProps> = ({
   useButtonPicker,
   pickerButtonProps,
   onSelect,
-  parentEntityId,
   defaultValue,
   title = 'Select Item',
   entityFooter,
+  configurableColumns,
+  formId,
 }) => {
   const [state, setState] = useState<IEntityPickerState>({
     showModal: false,
     ...INITIAL_STATE,
   });
+
+  const { registerConfigurableColumns } = useDataTable();
+
+  useEffect(() => {
+    // This is important for form designer configured picker
+    // register columns
+    if (formId && configurableColumns) {
+      registerConfigurableColumns(formId, configurableColumns);
+    }
+  }, [formId, configurableColumns]);
+
+  if (!tableId && !entityType) {
+    throw new Error(
+      'Please make sure that either tableId or entityType is configured for the entity picker to work properly'
+    );
+  }
 
   const toggleModalVisibility = () =>
     setState(current => ({
@@ -185,7 +211,7 @@ export const EntityPicker: FC<IEntityPickerProps> = ({
         okText="Select"
         footer={footer}
       >
-        <DataTableProvider tableId={tableId} onDblClick={onDblClick} parentEntityId={parentEntityId}>
+        <>
           <GlobalTableFilter
             searchProps={{ size: 'middle', autoFocus: true, placeholder: 'Search by Title, Type or Keyword...' }}
           />
@@ -195,9 +221,23 @@ export const EntityPicker: FC<IEntityPickerProps> = ({
           </div>
 
           <IndexTable onSelectRow={onSelectRow} onDblClick={onDblClick} selectedRowIndex={state?.selectedRowIndex} />
-        </DataTableProvider>
+        </>
       </Modal>
     </div>
+  );
+};
+
+const EntityPicker: FC<IEntityPickerProps> = props => {
+  const { tableId, parentEntityId, entityType } = props;
+  return (
+    <DataTableProvider
+      tableId={tableId}
+      // onDblClick={onDblClick}
+      parentEntityId={parentEntityId}
+      entityType={entityType}
+    >
+      <EntityPickerInner {...props} />
+    </DataTableProvider>
   );
 };
 

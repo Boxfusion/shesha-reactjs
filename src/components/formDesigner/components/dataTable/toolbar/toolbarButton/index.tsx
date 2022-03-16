@@ -7,6 +7,7 @@ import { evaluateKeyValuesToObject, evaluateString } from '../../../../../../pro
 import { IToolbarButton } from '../../../../../../providers/toolbarConfigurator/models';
 import ShaIcon, { IconType } from '../../../../../shaIcon';
 import classNames from 'classnames';
+import moment from 'moment';
 
 export interface IToolbarButtonProps extends IToolbarButton {
   formComponentId: string;
@@ -20,7 +21,7 @@ interface IKeyValue {
 }
 
 export const ToolbarButton: FC<IToolbarButtonProps> = props => {
-  const { getAction, form, setFormMode } = useForm();
+  const { getAction, form, setFormMode, formData, formMode } = useForm();
   const { router } = useShaRouting();
 
   if (props?.buttonAction === 'dialogue') {
@@ -48,6 +49,19 @@ export const ToolbarButton: FC<IToolbarButtonProps> = props => {
   const onButtonClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation(); // Don't collapse the CollapsiblePanel when clicked
 
+    const executeExpression = (expression: string) => {
+      if (!expression) {
+        console.error('Expected expression to be defined but it was found to be empty.');
+
+        return;
+      }
+
+      // tslint:disable-next-line:function-constructor
+      const func = new Function('data', 'moment', 'form', 'formMode', expression);
+
+      return func(formData, moment, form, formMode);
+    };
+
     switch (props.buttonAction) {
       case 'navigate':
         if (props.targetUrl) {
@@ -59,11 +73,11 @@ export const ToolbarButton: FC<IToolbarButtonProps> = props => {
           router?.push(preparedUrl);
         } else console.warn('tagret Url is not specified');
         break;
-      // case 'dialogue':
-      //   if (props.modalFormId) {
-      //     dynamicModal.open();
-      //   } else console.warn('Modal Form is not specified');
-      //   break;
+      case 'executeScript':
+        if (props?.actionScript) {
+          executeExpression(props?.actionScript);
+        }
+        break;
       case 'submit':
         form?.submit();
         break;
