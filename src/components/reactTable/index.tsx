@@ -17,6 +17,7 @@ import { Empty, Spin } from 'antd';
 import _ from 'lodash';
 import { IReactTableProps } from './interfaces';
 import { nanoid } from 'nanoid/non-secure';
+import { usePrevious } from 'react-use';
 // const headerProps = (props, { column }) => getStyles(props, column.align);
 
 const cellProps: CellPropGetter<object> = (props, { cell }) => getStyles(props, cell.column.align);
@@ -145,8 +146,14 @@ const ReactTable: FC<IReactTableProps> = ({
 
   const { pageIndex, pageSize, selectedRowIds } = state;
 
+  const previousSelectedRowIds = usePrevious(selectedRowIds);
+
   useEffect(() => {
-    if (selectedRowIds && typeof onSelectedIdsChanged === 'function') {
+    if (
+      selectedRowIds &&
+      typeof onSelectedIdsChanged === 'function' &&
+      !_.isEqual(previousSelectedRowIds, selectedRowIds)
+    ) {
       const arrays: string[] = data
         ?.map(({ Id }, index) => {
           if (selectedRowIds[index]) {

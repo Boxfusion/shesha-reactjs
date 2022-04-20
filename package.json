@@ -24,7 +24,7 @@
     "generate-fetcher": "restful-react import --config restful-react.config.js",
     "postgenerate-fetcher": "prettier ./src/apis/*.tsx --write",
     "storybook": "start-storybook -p 6006",
-    "storybook:hack": "start-storybook -p 3015",
+    "storybook:hack": "start-storybook -p 5001",
     "predeploy": "npm run build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
     "build-storybook": "build-storybook",
