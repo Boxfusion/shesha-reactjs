@@ -1,1 +1,0 @@
-//!newState.some(item => item.chosen !== null && item.chosen !== undefined);
