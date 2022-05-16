@@ -8,6 +8,7 @@ export * from './form';
 export * from './indexView';
 export * from './notes';
 export * from './queryBuilder';
+export * from './itemListConfigurator';
 export * from './scheduledJobExecution';
 export * from './shaRouting';
 export * from './sheshaApplication';
