@@ -11,7 +11,11 @@ export default {
   component: FileUpload,
 } as Meta;
 
-const customFileProps: ICustomFileProps = {};
+const customFileProps = {
+  fileId: '4f5f7ecf-a8e2-45f7-9d16-fa8e2c3fb50c',
+  ownerId: 'dfb0d47e-a3f5-4a36-bd75-c386937e04b0',
+  ownerType: 'Shesha.Framework.ConfigurableComponent',
+};
 
 const backendUrl = process.env.STORYBOOK_BASE_URL; // TODO: Make this configurable
 
@@ -19,9 +23,7 @@ const backendUrl = process.env.STORYBOOK_BASE_URL; // TODO: Make this configurab
 const Template: Story<ICustomFileProps> = args => (
   <StoryApp>
     <StoredFileProvider
-      ownerId="32e2b3dd-4d99-4542-af71-134ec7c0e2ce"
-      ownerType="Shesha.Core.Person"
-      propertyName="Photo"
+      // propertyName="Photo"
       baseUrl={backendUrl}
       {...args}
     >

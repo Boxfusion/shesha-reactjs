@@ -14,7 +14,6 @@ export interface IFileUploadProps {
   allowDelete?: boolean;
   accept?: string;
   callback?: (...args: any) => any;
-
   value?: any;
   onChange?: any;
 }
@@ -39,6 +38,8 @@ export const FileUpload: FC<IFileUploadProps> = ({
   } = useStoredFile();
   const uploadButtonRef = useRef(null);
   //console.log(uploadMode);
+
+  console.log('FileUpload fileInfo: ', fileInfo);
 
   const onCustomRequest = ({ file /*, onError, onSuccess*/ }: RcCustomRequestOptions) => {
     // call action from context
@@ -118,6 +119,7 @@ export const FileUpload: FC<IFileUploadProps> = ({
 
   const showUploadButton = allowUpload && !fileInfo && !isUploading;
   const classes = fileInfo || isUploading ? 'sha-upload sha-upload-has-file' : 'sha-upload';
+
   return (
     <Upload {...fileProps} className={classes}>
       <a ref={uploadButtonRef} style={{ display: !showUploadButton ? 'none' : '' }}>

@@ -95,9 +95,12 @@ const StoredFileProvider: FC<PropsWithChildren<IStoredFileProviderProps>> = prop
       headers,
     },
   });
+
   const { loading: isFetchingFileInfo, error: fetchingFileInfoError, data: fetchingFileInfoResponse } = fileId
     ? fileFetcher
     : propertyFetcher;
+
+  console.log('doFetchFileInfo fileId, ownerId, ownerType: ', fileId, ownerId, ownerType);
 
   const doFetchFileInfo = () => {
     if (fileId) fileFetcher.refetch({ queryParams: { id: fileId } });
@@ -221,7 +224,7 @@ const StoredFileProvider: FC<PropsWithChildren<IStoredFileProviderProps>> = prop
     dispatch(uploadFileRequestAction(newFile));
 
     axios
-      .put(`${baseUrl}/api/StoredFile`, formData, {
+      .post(`${baseUrl}/api/StoredFile/Upload`, formData, {
         headers,
       })
       .then((response: any) => {
