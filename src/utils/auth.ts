@@ -3,7 +3,7 @@ import { getLocalizationOrDefault } from './localization';
 import { getLocalStorage } from './storage';
 
 // Fields to remove from the AuthContext
-interface IAccessToken {
+export interface IAccessToken {
   accessToken?: string | null;
   expireInSeconds?: number;
   expireOn?: string;
@@ -56,10 +56,9 @@ export const hasTokenExpired = (date: string): boolean => {
 
 export const getHttpHeaders = (token: string | null) => {
   const headers = {};
-  if (token)
-    headers['Authorization'] = `Bearer ${token}`;
+  if (token) headers['Authorization'] = `Bearer ${token}`;
 
   headers['.AspNetCore.Culture'] = getLocalizationOrDefault();
-    
+
   return headers;
-}
+};

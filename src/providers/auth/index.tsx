@@ -48,6 +48,7 @@ import { useSheshaApplication } from '../sheshaApplication';
 import { getCurrentUrl, getLoginUrlWithReturn, getQueryParam, isSameUrls } from '../../utils/url';
 import { getFlagSetters } from '../utils/flagsSetters';
 import { IErrorInfo } from '../../interfaces/errorInfo';
+import { usePersistedAccessToken } from './useAcesssToken';
 
 const DEFAULT_HOME_PAGE = '/';
 
@@ -106,6 +107,10 @@ const AuthProvider: FC<PropsWithChildren<IAuthProviderProps>> = ({
     headers: getHttpHeadersFromToken(storedToken?.accessToken),
   });
   const setters = getFlagSetters(dispatch);
+
+  const persistedSynchedToken = usePersistedAccessToken(tokenName);
+
+  console.log('persistedSynchedToken: ', persistedSynchedToken);
 
   //#region Fetch user login info`1
 

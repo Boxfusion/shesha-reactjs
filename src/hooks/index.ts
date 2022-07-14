@@ -12,3 +12,5 @@ export { useDeepCompareMemo } from './useDeepCompareMemo';
 export { useDeepCompareMemoize } from './useDeepCompareMemoize';
 export { useEnhancedCreateForm } from './useEnhancedCreateForm';
 export { usePubSub, useSubscribe, useSubscribedValue, usePublish } from './usePubSub';
+export { useLocalStorageSynchedState } from './useLocalStorageSynchedState';
+export { useCrossTabState } from './useCrossTabState';
